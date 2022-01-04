@@ -7,28 +7,9 @@ import Sketch from 'react-native-sketch';
 
 
   function App() {
-  /**
-   * Log out an example event after zooming
-   *
-   * @param event
-   * @param gestureState
-   * @param zoomableViewEventObject
-   */
-  // logOutZoomState = (event, gestureState, zoomableViewEventObject) => {
-  //   console.log('');
-  //   console.log('');
-  //   console.log('-------------');
-  //   console.log('Event: ', event);
-  //   console.log('GestureState: ', gestureState);
-  //   console.log('ZoomableEventObject: ', zoomableViewEventObject);
-  //   console.log('');
-  //   console.log(`Zoomed from ${zoomableViewEventObject.lastZoomLevel} to  ${zoomableViewEventObject.zoomLevel}`);
-  // }
-
-  // const [onBtn,setBtnOn] = useState();
-  // const [ofBtn,setBtnOf] = useState();
-
+  
   const [zoomOn,setZoomOn] = useState(false);
+  const [touchEnabled,setTouchEnabled] = useState(true);
 
   return (
       <View style={{ flex: 1 }}>
@@ -37,10 +18,11 @@ import Sketch from 'react-native-sketch';
 
         
 
-           <PinchZoomView scalable={zoomOn}  maxScale={500} minScale={-500}>
+           <PinchZoomView scalable={zoomOn}  maxScale={500} minScale={-1}>
           <SketchCanvas
+          touchEnabled={touchEnabled}
             style={{ height:3800,width:1000,backgroundColor:'white' }}
-            strokeColor={'red'}
+            strokeColor={'black'}
             strokeWidth={5}
           />
            </PinchZoomView>
@@ -49,8 +31,10 @@ import Sketch from 'react-native-sketch';
           <Button title="of Button" onPress={() => {
               if(zoomOn == true){
                 setZoomOn(false);
+                setTouchEnabled(true);
               }
               else{
+                setTouchEnabled(false)
                 setZoomOn(true);
               }
 
